@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static  %}
+{% block content %}
+<br>
+<div class="text-center">
+  <a href="{% url 'post_places'%}">
+              <button type="button" class="btn btn-outline-warning ">upload Image Places Category</button>
+              </a>
+            
+                     
+</div >
+<br>
+<div class="text-center">
+   <a href="{% url 'post_people'%}">
+              <button type="button" class="btn btn-outline-warning ">upload Image people Category</button>
+              </a>   
+</div>
+<br>
+<div class="text-center">
+  <a href="{% url 'add_post'%}">
+              <button type="button" class="btn btn-outline-warning ">upload Image  posts  Category</button>
+              </a> 
+</div>
+<br>
+{% endblock %}
+
+
+

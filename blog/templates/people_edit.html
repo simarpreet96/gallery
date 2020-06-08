@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center">
+    <h2>PEOPLE</h2>
+    <form method="POST" action="{% url 'post_people' %}" enctype="multipart/form-data">
+    	{% csrf_token %}
+        {{ people_form.as_p }}
+        
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+    </div>
+{% endblock %}

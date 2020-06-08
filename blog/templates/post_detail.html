@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style type="text/css">
+	.like, .dislike {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background: lightgreen;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    border-radius: 4px;
+}
+.qty1, .qty2 {
+    border: none;
+    width:20px;
+    background: transparent;
+}
+</style>
+ <hr>
+ <!-- Modal 1 -->
+ <div class="text-center">
+  <p>
+    <p>{{post.title}}</p>
+    <a style="height: 450px;width:450px" href="/media/{{post.image}}">
+    <img style="height: 450px;width:450px" src="/media/{{post.image}}"></a>
+  </p>
+   <div class="container"> 
+  <!-- <div id="rating">
+    <button class="like">Like</button>
+    <span class="likes">0</span>
+    <button class="dislike">Dislike</button>
+    <span class="dislikes">0</span>
+</div> -->
+ <script type="text/javascript">
+   $('#rating').likeDislike({
+        initialValue: 0,
+        click: function (value, l, d, event) {
+            var likes = $(this.element).find('.likes');
+            var dislikes = $(this.element).find('.dislikes');
+
+            likes.text(parseInt(likes.text()) + l);
+            dislikes.text(parseInt(dislikes.text()) + d);
+
+            // $.ajax({
+            //     url: 'url',
+            //     type: 'post',
+            //     data: 'value=' + value,
+            // });
+        }
+    });
+</script>
+</div>
+  <hr>
+<a class="btn btn-default" href="{% url 'add_comment_to_post' post.pk %}">Add comment</a>
+{% for comment in post.comments.all %}
+    {% if user.is_authenticated or comment.approved_comment %}
+    <div class="comment">
+        <div class="date">
+            
+        </div>
+        <strong>{{ comment.name }}</strong>
+        <p>{{ comment.created_date }}:{{ comment.text|linebreaks }}</p>
+    </div>
+    {% endif %}
+{% empty %}
+    <p>No comments here yet :(</p>
+{% endfor %}
+  
+</div>
+{% endblock %}
+  

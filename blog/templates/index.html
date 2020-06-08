@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<!-- Portfolio Grid -->
+  <section class="bg-light page-section" id="portfolio">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase">Gallery</h2>
+          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+        </div>
+      </div>
+      <div class="container" >
+         <a href="{% url 'allposts'%}">
+              <button type="button" class="btn btn-outline-warning ">All</button>
+              </a>
+            <a href="{% url 'places'%}">
+              <button type="button" class="btn btn-outline-warning ">placess</button>
+              </a>
+             <a href="{% url 'people'%}">
+              <button type="button" class="btn btn-outline-warning ">peoples</button>
+              </a>   
+                <a href="{% url 'posts'%}">
+              <button type="button" class="btn btn-outline-warning ">posts</button>
+              </a>                 
+</div>
+<br>
+
+      <div class="row">
+         {% for post in posts %}
+     {% if post.approved_post == True %}
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link"  href="{% url 'post_detail' pk=post.pk %}">
+            <img style="height: 250px;width:250px" class="img-fluid" src="/media/{{post.image}}" alt="">
+          </a>
+          <div class="portfolio-caption">
+            <!-- <h4 class="text-muted">{{post.name}}</h4> -->
+            <p class="text-muted">{{post.name}}</p>
+          </div>        
+        </div>
+        {% endif %}
+{% endfor %}
+
+
+
+      {% for pl in placess %}
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link" href="{% url 'places_detail' pl.pk %}">
+            <img style="height: 250px;width:250px" class="img-fluid" src="/media/{{pl.image_places}}" alt="" height="">
+          </a>
+          <div class="portfolio-caption">
+            <!-- <h4 class="text-muted">{{pl.name}}</h4> -->
+            <p class="text-muted">{{pl.name}}</p>
+          </div>
+        </div>
+      {% endfor %}
+
+
+{% for pe in peoples %}
+<div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link"  href="{% url 'people_detail'  pe.id %}">
+            <img style="height: 250px;width:250px" class="img-fluid" src="/media/{{pe.image_people}}" alt="">
+          </a>
+          <div class="portfolio-caption">
+            <!-- <h4 class="text-muted">{{pe.name}}</h4> -->
+            <p class="text-muted">{{pe.name}}</p>
+          </div>
+        </div>
+      {% endfor %}
+
+
+
+      </div>
+    </div>
+  </section>
+
+  
+{% endblock %}
